@@ -1,4 +1,4 @@
-package {
+package ship {
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.ui.Keyboard;

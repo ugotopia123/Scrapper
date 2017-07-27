@@ -1,4 +1,5 @@
 package shipParts {
+	import ship.Ship;
 	
 	/**
 	 * ...
@@ -7,7 +8,7 @@ package shipParts {
 	public class ShipPart {
 		public var name:String;
 		public var weight:Number;
-		protected var owner:Ship;
+		protected var owner:ship.Ship;
 		protected var levelVector:Vector.<Function>;
 		private var leveled:Boolean = false;
 		
@@ -26,12 +27,12 @@ package shipParts {
 			return new ShipPart(name, weight);
 		}
 		
-		public function equip(ship:Ship):void {
+		public function equip(ship:ship.Ship):void {
 			ship.weight += weight;
 			owner = ship;
 		}
 		
-		public function unequip(ship:Ship):void {
+		public function unequip(ship:ship.Ship):void {
 			ship.weight -= weight;
 			owner = null;
 		}

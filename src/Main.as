@@ -4,12 +4,13 @@ package{
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.TimerEvent;
-	import flash.ui.Keyboard;
 	import flash.utils.Timer;
+	import ship.Ship;
 	import shipParts.Hull;
 	import shipParts.MainThruster;
 	import shipParts.ShipPart;
 	import shipParts.SideThruster;
+	import StarLayer;
 	
 	/**
 	 * ...
@@ -17,7 +18,7 @@ package{
 	 */
 	public class Main extends Sprite {
 		public static var stageInstance:Stage;
-		public static var player:Ship;
+		public static var player:ship.Ship;
 		public static var keysDown:Vector.<uint> = new Vector.<uint>();
 		
 		private static var updateTimer:Timer = new Timer(1000 / 60);
@@ -34,7 +35,7 @@ package{
 			currentStageWidth = stageInstance.stageWidth;
 			currentStageHeight = stageInstance.stageHeight;
 			
-			DistantStar.initialize();
+			StarLayer.initialize();
 			ShipPart.initialize();
 			
 			stageInstance.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
@@ -43,11 +44,9 @@ package{
 			updateTimer.addEventListener(TimerEvent.TIMER, updateHandler);
 			updateTimer.start();
 			
-			player = new Ship(Hull.guardian, MainThruster.warp, SideThruster.standard);
+			player = new ship.Ship(Hull.standard, MainThruster.warp, SideThruster.standard);
 			player.x = stageInstance.stageWidth / 2 - player.width / 2;
 			player.y = stageInstance.stageHeight / 2 - player.height / 2;
-			player.hull.bonusLevel(100);
-			player.mainThruster.bonusLevel(100);
 		}
 		
 		public static function randNumber(min:Number, max:Number):Number {
@@ -67,7 +66,7 @@ package{
 			var ySpeed:Number = player.updatedSpeed() * Math.cos(angle);
 			var rotate:Number = player.updatedRotation();
 			
-			if (xSpeed != 0 || ySpeed != 0) DistantStar.starHandler(-xSpeed, ySpeed);
+			if (xSpeed != 0 || ySpeed != 0) StarLayer.starHandler(-xSpeed, ySpeed);
 			if (rotate != 0) player.rotation += rotate;
 		}
 		

@@ -1,4 +1,5 @@
 package shipParts {
+	import ship.Ship;
 	
 	/**
 	 * ...
@@ -57,7 +58,7 @@ package shipParts {
 			return new MainThruster(name, weight, speed, thrust);
 		}
 		
-		override public function equip(ship:Ship):void {
+		override public function equip(ship:ship.Ship):void {
 			super.equip(ship);
 			
 			if (ship.mainThruster != null) ship.mainThruster.unequip(ship);
@@ -65,7 +66,7 @@ package shipParts {
 			ship.mainThruster = this;
 		}
 		
-		override public function unequip(ship:Ship):void {
+		override public function unequip(ship:ship.Ship):void {
 			super.unequip(ship);
 			ship.mainThruster = null;
 		}
